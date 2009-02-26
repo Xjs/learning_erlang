@@ -1,5 +1,5 @@
 -module(tut).
--export([double/1, fac/1, mult/2, convert/2]).
+-export([double/1, fac/1, mult/2, convert_length/2]).
 
 double(X) ->
 	2 * X.
@@ -12,8 +12,8 @@ fac(N) ->
 mult(X, Y) ->
 	X * Y.
 
-convert(M, inch) ->
-	M / 2.54;
+convert_length({inch, X}) ->
+	{centimeter, M / 2.54};
 
-convert(N, centimeter) ->
-	N * 2.54.
+convert_length({centimeter, Y}) ->
+	{inch, N * 2.54}.
