@@ -7,15 +7,15 @@ format_temps(List_of_cities) ->
 	{Max_city, Min_city} = find_max_and_min(Converted_List),
 	print_max_and_min(Max_city, Min_city).
 
-convert_list_to_c([{Name, {f, F}} | Rest]) ->
-	Converted_City = {Name, {c, (F -32) * 5 / 9}},
-	[Converted_City | convert_list_to_c(Rest)];
+convert_to_c({Name, {f, Temp}}) ->
+    {Name, {c, trunc((Temp - 32) * 5 / 9)}};
+convert_to_c({Name, {c, Temp}}) ->
+    {Name, {c, Temp}}.
 
-convert_list_to_c([City | Rest]) ->
-	[City | convert_list_to_c(Rest)];
-
-convert_list_to_c([]) ->
-	[].
+convert_list_to_c(List) ->
+	New_list = lists:map(fun convert_to_c/1, List),
+	lists:sort(fun({_, {c, Temp1}}, {_, {c, Temp2}}) ->
+		Temp1 < Temp2 end, New_list).
 
 print_temp([{Name, {c, Temp}} | Rest]) ->
 	io:format("~-15w ~w c~n", [Name, Temp]),
