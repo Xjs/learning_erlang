@@ -1,11 +1,12 @@
 -module(pingpong).
+-export([start/1, ping/2, pong/0]).
 
 ping(0, Pong_Node) ->
-	{pong, Pong_Node} ! finished
+	{pong, Pong_Node} ! finished,
 	io:format("ping finished~n", []);
 
 ping(N, Pong_Node) ->
-	{pong, Pong_Node) ! {ping, self()},
+	{pong, Pong_Node} ! {ping, self()},
 	receive
 		pong ->
 			io:format("Ping received pong~n", [])
