@@ -2,9 +2,9 @@
 -export([is_even_prime/1]).
 
 is_even_prime(2) ->
-	true;
+    true;
 is_even_prime(N) when is_integer(N) ->
-	false;
+    false;
 is_even_prime(Any) ->
-	'I prefer integer inputs.'.
+    'I prefer integer inputs.'.
 
